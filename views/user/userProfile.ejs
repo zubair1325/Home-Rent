@@ -1,0 +1,33 @@
+<% layout("/layouts/boilerplate") %>
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6 text-center">
+
+            <h2>Your Profile</h2>
+            <hr>
+
+            <img src="<%= currUser.userPhoto %>" 
+                 alt="Profile Photo" 
+                 class="img-thumbnail mb-3" 
+                 style="width:150px; height:150px; object-fit:cover; border-radius:50%;">
+
+            <h4>Username: <%= currUser.username %></h4>
+            
+
+            <% if(currUser.googleId) {%> 
+               <p><strong>Email:</strong> <%= currUser.email %> (Verified) </p>
+            <% } %> 
+
+            <% if(!currUser.googleId) {%> 
+                <p><strong>Email:</strong> <%= currUser.email %> <a href="/auth/google">Verify Email</a>  </p>
+                
+            <% } %>
+            <!-- <a href="/profile/edit" class="btn btn-dark mt-3">Edit Profile</a> -->
+        </div>
+    </div>
+</div>
+
+
+
+
+

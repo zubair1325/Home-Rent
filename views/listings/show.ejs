@@ -1,0 +1,150 @@
+<% layout("/layouts/boilerplate") %>
+
+<script>
+  const mapToken = "<%= process.env.MAP_TOKEN %>";
+  const listing = <%- JSON.stringify(l) %>;
+</script>
+
+<body>
+  <div class="container mt-4">
+    <div class="row">
+      <div class="col-12 text-center text-md-start">
+        <h3 class="fw-bold text-center">
+          <%= l.title %>
+          <small class="text-muted d-block d-md-inline">
+            <i>Owned by <%= l.owner.username %></i>
+          </small>
+        </h3>
+      </div>
+    </div>
+
+    <div class="row justify-content-center mt-3">
+      <div class="col-12 col-md-8 col-lg-6">
+        <div class="card listing-card">
+          <img
+            src="<%= l.image.url %>"
+            class="card-img-top"
+            alt="listing-image"
+          />
+
+          <div class="card-body">
+            <p
+              class="card-text"
+              style="white-space: pre-wrap; margin: 0.25rem 0 0 0">
+              <%= l.description %>
+            </p>
+            <p class="mt-0" style="margin: 0.25rem 0 0 0">
+              <b>Tk <%= l.price.toLocaleString("en-BD") %> / night </b>
+            </p>
+            <p><b><%= l.location %> , <%= l.country %></b></p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <% if(currUser && currUser._id.equals(l.owner._id)){ %>
+    <div class="row justify-content-center mt-3 mb-3">
+      <div class="col-12 col-md-8 col-lg-6 d-flex gap-3">
+        <a href="/listings/<%= l._id %>/edit" class="btn btn-dark flex-fill"
+          >Edit</a
+        >
+
+        <form
+          method="post"
+          action="/listings/<%= l._id %>?_method=DELETE"
+          class="flex-fill"
+        >
+          <button class="btn btn-dark w-100">Delete</button>
+        </form>
+      </div>
+    </div>
+    <% } %> <% if(currUser){ %>
+    <div class="row justify-content-center mt-4">
+      <div class="col-12 col-md-8 col-lg-6">
+        <hr />
+        <h4>Leave a Review</h4>
+
+        <form
+          class="mb-3 needs-validation"
+          action="/listings/<%= l._id %>/reviews"
+          method="post"
+          novalidate
+        >
+          <div class="mb-3">
+            <fieldset class="starability-slot">
+              <input type="radio" name="review[rating]" value="1" checked />
+              <input type="radio" id="r1" name="review[rating]" value="1" />
+              <label for="r1">1 star</label>
+
+              <input type="radio" id="r2" name="review[rating]" value="2" />
+              <label for="r2">2 stars</label>
+
+              <input type="radio" id="r3" name="review[rating]" value="3" />
+              <label for="r3">3 stars</label>
+
+              <input type="radio" id="r4" name="review[rating]" value="4" />
+              <label for="r4">4 stars</label>
+
+              <input type="radio" id="r5" name="review[rating]" value="5" />
+              <label for="r5">5 stars</label>
+            </fieldset>
+          </div>
+
+          <div class="mb-3">
+            <label for="comment" class="form-label fw-bold">Comments</label>
+            <textarea
+              id="comment"
+              name="review[comment]"
+              rows="5"
+              class="form-control"
+              required
+            ></textarea>
+            <div class="invalid-feedback">Please write something.</div>
+          </div>
+
+          <button class="btn btn-outline-dark">Submit</button>
+        </form>
+      </div>
+    </div>
+    <% } %> <% if(l.reviews.length > 0){ %>
+    <div class="row justify-content-center mt-4">
+      <div class="col-12 col-md-10 col-lg-8">
+        <hr />
+        <h4><b>All Reviews</b></h4>
+
+        <div class="row">
+          <% for( r of l.reviews) {%>
+          <div class="col-12 col-md-6 mb-3">
+            <div class="card p-3">
+              <h5>@<%= r.author.username %></h5>
+
+              <p class="starability-result" data-rating="<%= r.rating %>"></p>
+              <p><%= r.comment %></p>
+
+              <% if(currUser && currUser.username === r.author.username){ %>
+              <form
+                method="POST"
+                action="/listings/<%= l._id %>/reviews/<%= r._id %>?_method=DELETE"
+              >
+                <button class="btn btn-sm btn-dark mt-2">Delete</button>
+              </form>
+              <% } %>
+            </div>
+          </div>
+          <% } %>
+        </div>
+      </div>
+    </div>
+    <% } %>
+
+    <div class="row justify-content-center mt-5">
+      <div class="col-12 col-md-10 col-lg-8">
+        <hr />
+        <h3>Where you'll be</h3>
+        <div id="map"></div>
+      </div>
+    </div>
+  </div>
+
+  <script src="/js/map.js"></script>
+</body>

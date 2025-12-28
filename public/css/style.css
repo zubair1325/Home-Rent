@@ -1,0 +1,151 @@
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  font-family: "Plus Jakarta Sans", sans-serif !important;
+  overflow-x: hidden;
+}
+
+.container {
+  flex: 1;
+}
+
+/* nav bar style code */
+
+.navbar {
+  height: 5rem;
+  background-color: white;
+}
+.fa-compass {
+  color: #fe424d;
+  font-size: 2rem;
+}
+.nav-link {
+  color: #222222 !important;
+}
+#navbarNavAltMarkup .navbar-nav a {
+  transition: font-weight 0.2s ease-in-out;
+}
+#navbarNavAltMarkup .navbar-nav a:hover {
+  font-weight: 500;
+  text-decoration: underline;
+}
+
+/* footer code start here */
+.f-info {
+  text-align: center;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: space-evenly;
+  height: 8rem;
+  background-color: #ebebeb;
+  gap: 1rem;
+}
+.f-info-links,
+.f-info-socials,
+.f-info-brand {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  vertical-align: middle;
+}
+.f-info-links a {
+  text-decoration: none;
+  color: #222222;
+}
+.f-info-links a:nth-of-type(1) {
+  margin-right: 1rem;
+}
+.f-info-links a:hover {
+  text-decoration: underline;
+}
+
+.f-info-socials i {
+  font-size: 1.2rem;
+  margin-left: 1rem;
+}
+/* cards */
+.listing-card {
+  border: none !important;
+}
+.index-row .card {
+  border: none !important;
+  cursor: pointer;
+  margin-bottom: 2rem;
+  transition: opacity 0.5s ease;
+}
+.index-row .card:hover {
+  opacity: 0.8;
+}
+.card strong {
+  font-weight: 400;
+  text-decoration: none !important;
+}
+.card-img-top {
+  border-radius: 1rem !important;
+  width: 100% !important;
+  object-fit: cover;
+}
+.card-body {
+  padding: 0 !important;
+}
+.card-body p {
+  font-family: "Plus Jakarta Sans", serif;
+  font-optical-sizing: auto;
+  font-weight: 400 !important;
+  font-style: normal;
+}
+.card-body p > b {
+  font-weight: 600 !important;
+}
+.index-row a {
+  text-decoration: none;
+  color: #222222;
+}
+.index-row .card .card-img-overlay p {
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+.index-row .card:hover .card-img-overlay p {
+  opacity: 1;
+}
+/* add btn */
+
+.add-btn,
+.edit-btn,
+.delete-btn,
+.comment-submit {
+  background-color: #fe424d !important;
+  color: white !important;
+  border: none !important;
+  border-radius: 0.5rem !important;
+  transition: all 0.5s ease;
+}
+.add-btn:hover,
+.edit-btn:hover,
+.delete-btn:hover,
+.comment-submit:hover {
+  background-color: #ff6b7d !important;
+  font-weight: 500 !important;
+  box-shadow: 3px 2px 2px rgba(0, 0, 0, 0.337);
+}
+.comment-submit {
+  background-color: #222222 !important;
+  height: 40px;
+}
+/* show listings */
+.show-image {
+  height: 30vh;
+}
+.show-btn-container {
+  display: flex;
+  gap: 1rem;
+}
+/* map */
+#map {
+  height: 400px;
+}
+
+
